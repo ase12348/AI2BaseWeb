@@ -6,7 +6,7 @@
 
 版本 `3.3.0` · 社区版 · Apache-2.0
 
-[官方网站](https://www.jcodesoft.com) · [后端服务](https://cnb.cool/simcode.hat/AI2BaseApi) · [移动端](https://cnb.cool/simcode.hat/AI2BaseApp)
+[官方网站](https://www.jcodesoft.com) · [后端服务](https://gitee.com/program_cat/ai2-base-api) · [移动端](https://gitee.com/program_cat/ai2-base-app)
 
 </div>
 
@@ -21,8 +21,8 @@
 | 组成 | 仓库 | 技术栈 | 说明 |
 | --- | --- | --- | --- |
 | Web 前端 | 当前仓库 | Vue 3 / Vite / TS | PC 端管理界面 |
-| 后端服务 | [AI2BaseApi](https://cnb.cool/simcode.hat/AI2BaseApi) | .NET 10 / ASP.NET Core | API 宿主、ORM、权限、缓存、任务调度 |
-| 移动端 | [AI2BaseApp](https://cnb.cool/simcode.hat/AI2BaseApp) | uni-app / Vue 3 | 同一套表单渲染到小程序 / App / 鸿蒙 |
+| 后端服务 | [AI2BaseApi](https://gitee.com/program_cat/ai2-base-api) | .NET 10 / ASP.NET Core | API 宿主、ORM、权限、缓存、任务调度 |
+| 移动端 | [AI2BaseApp](https://gitee.com/program_cat/ai2-base-app) | uni-app / Vue 3 | 同一套表单渲染到小程序 / App / 鸿蒙 |
 
 > 官网与产品介绍：**<https://www.jcodesoft.com>**
 
@@ -128,7 +128,7 @@ VITE_GLOB_API_URL = http://localhost:5050
 
 ### 3. 启动后端服务
 
-前端依赖后端基座提供接口与菜单。请先拉取并启动 [AI2BaseApi](https://cnb.cool/simcode.hat/AI2BaseApi)：
+前端依赖后端基座提供接口与菜单。请先拉取并启动 [AI2BaseApi](https://gitee.com/program_cat/ai2-base-api)：
 
 ```bash
 dotnet build jcode.framework.sln
