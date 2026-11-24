@@ -24,8 +24,6 @@ export {
   mmToPt,
   countFileSize,
   getBarcodeImg,
-  toFormSchema,
-  toIndexSchema,
   useActions,
   fullScreenLoading,
   upFirst,

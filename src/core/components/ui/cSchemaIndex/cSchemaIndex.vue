@@ -99,7 +99,7 @@
   import { getFileIcon } from '../utils/file';
   import { formatToDate } from '../utils/date';
 
-  import { useFlow } from '../flowDesign/utils';
+  import { useFlow } from './flow';
   import { useFramework } from '../utils/useFramework';
 
   defineOptions({ name: createNamespace('cSchemaIndex').name });

@@ -192,7 +192,6 @@
       'barcode',
       'cascader',
       'pkey', // 为系统自动添加的组件（主键组件）
-      'inputFlow',
       'buttonLayer',
     ].includes(components[id]?.type) ||
     components[id]?.type?.indexOf('lr-input') > -1 ||

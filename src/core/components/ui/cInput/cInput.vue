@@ -146,7 +146,6 @@
         | 'qrcode'
         | 'barcode'
         | 'inputCode'
-        | 'inputFlow'
         | 'inputTag'
         | 'cascaderSelect'
         | 'buttonLayer'
@@ -373,7 +372,6 @@
     cascader: 'a-cascader',
     codeMirror: 'lr-code-mirror',
     inputCode: 'lr-input-code',
-    inputFlow: 'lr-input-flow',
     inputColor: 'lr-input-color',
     textEditor: 'lr-text-editor',
     count: 'lr-count',
@@ -581,10 +579,8 @@
             if (item.moreConfig.dataType === 'options') {
               t.config.options = item.moreConfig.options;
             } else if (item.moreConfig.dataType === 'dataItem' && item.moreConfig.dataCode) {
-              loadDataItemList &&
-                loadDataItemList(item.moreConfig.dataCode, true);
-              const options =
-                getDataItemList(item.moreConfig.dataCode) || [];
+              loadDataItemList && loadDataItemList(item.moreConfig.dataCode, true);
+              const options = getDataItemList(item.moreConfig.dataCode) || [];
               t.config.options = options.map((v: Record<string, any>) => ({
                 label: v[item.moreConfig.labelKey],
                 value: v[item.moreConfig.valueKey],
