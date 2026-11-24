@@ -197,13 +197,5 @@
       color: #8c8c8c;
       font-size: 12px;
     }
-
-    .el-button--primary {
-      width: 155px;
-      margin-top: 32px;
-      padding: 9px 0;
-      border-radius: 2px;
-      font-size: 12px;
-    }
   }
 </style>
