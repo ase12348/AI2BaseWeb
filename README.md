@@ -46,7 +46,7 @@
 | ------ | -------------------------------------------------------------------- |
 | 框架   | Vue 3.5、Vue Router 4、Pinia 2、TypeScript 5.5                       |
 | 构建   | Vite 6、pnpm workspace、Turborepo、UnoCSS                            |
-| UI     | Element Plus、Ant Design Vue、vxe-table / vxe-pc-ui                  |
+| UI     | Ant Design Vue、vxe-table / vxe-pc-ui、自研 JcodeUI 组件             |
 | 通信   | Axios、Microsoft SignalR                                             |
 | 国际化 | Vue I18n                                                             |
 | 工程化 | ESLint、Prettier、Stylelint、Husky、lint-staged、commitlint + cz-git |
