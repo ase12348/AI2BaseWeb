@@ -37,7 +37,7 @@
             <lr-c-schema-form style="padding: 0" ref="refForm" @click="handleFormClick" />
           </div>
           <div class="copyright" :style="{ color: themeToken.colorTextTertiary }"
-            >Copyright © 2023-present {{ $t(companyName) }}{{ $t('出品') }}</div
+            >Copyright © {{ copyrightYear }} {{ $t(companyName) }}{{ $t('出品') }}</div
           >
         </div>
       </template>
@@ -65,6 +65,7 @@
 
   const title = options.title;
   const companyName = options.company;
+  const copyrightYear = options.copyrightYear;
 
   // options.params.isTenant
 

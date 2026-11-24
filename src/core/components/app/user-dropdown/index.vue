@@ -60,13 +60,14 @@
               {{ options.title }}
             </div>
             <div class="jcode-framework-info__version">
-              {{ $t('版本') }}:{{ options.version }}{{ options.edition ? ' ' + options.edition : '' }}</div
+              {{ $t('版本') }}:{{ options.version
+              }}{{ options.edition ? ' ' + options.edition : '' }}</div
             >
             <div>
               <!-- <lr-button @click="openLerun" type="primary">{{ $t('极简搭官网') }}</lr-button> -->
             </div>
             <div class="jcode-framework-info__footer">
-              <div>Copyright © 2023-present</div>
+              <div>Copyright © {{ options.copyrightYear }}</div>
               <div>{{ options.company }}</div>
             </div>
           </div>

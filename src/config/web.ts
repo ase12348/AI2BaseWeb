@@ -9,6 +9,8 @@ export default defineConfig<WebConfig>({
   edition: '社区版',
   title: 'AI应用开发基座',
   company: '苏州极简搭信息技术有限公司',
+  // 版权年份：登录页与「关于」弹窗共用，动态取当前年份，避免各处硬编码不一致
+  copyrightYear: new Date().getFullYear(),
   prefixCls: 'jcode',
   language: {
     mainType: 'chinese',

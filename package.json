@@ -1,10 +1,10 @@
 {
-  "name": "jcode-pro-vue3",
+  "name": "AI2BaseWeb",
   "version": "3.0.0",
   "homepage": "https://www.jcodesoft.com",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "author": {
-    "name": "jcode",
+    "name": "苏州极简搭信息技术有限公司",
     "email": "924720140@qq.com",
     "url": "https://www.jcodesoft.com"
   },

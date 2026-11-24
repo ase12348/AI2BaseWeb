@@ -18,6 +18,10 @@ export interface WebConfig {
    */
   company: string;
   /*
+   *版权年份（登录页与「关于」弹窗的 Copyright 展示共用）
+   */
+  copyrightYear: number;
+  /*
    *UI 样式前缀
    */
   prefixCls?: string;
