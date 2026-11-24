@@ -1,0 +1,67 @@
+.lr-table-btn {
+  display: inline-block;
+  position: relative;
+  height: 22px;
+  margin-right: 8px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  background-image: none;
+  color: var(--color-primary);
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:not(:disabled):hover {
+    color: var(--color-primary-hover);
+  }
+
+  &.dangerous {
+    color: var(--color-error-text);
+
+    &:hover {
+      color: var(--color-error-text-hover) !important;
+    }
+  }
+
+  &:disabled {
+    color: var(--color-text-quaternary) !important;
+    cursor: not-allowed;
+  }
+}
+
+.lr-table-card-btn {
+  margin-right: 4px !important;
+  padding: 2px !important;
+  border-radius: 4px;
+  color: var(--color-text) !important;
+
+  &:not(:disabled):hover {
+    background-color: var(--color-fill-secondary);
+    color: var(--color-text);
+  }
+
+  &.dangerous {
+    color: var(--color-error-text) !important;
+
+    &:hover {
+      background-color: var(--color-error-bg) !important;
+      color: var(--color-error-text) !important;
+    }
+  }
+}
+
+.lr-table-btns-panel {
+  padding: 8px;
+  border-radius: 4px;
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--box-shadow);
+}

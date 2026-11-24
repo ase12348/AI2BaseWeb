@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh" id="htmlRoot">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
+    />
+    <title><%= title %></title>
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link rel="stylesheet" href="<%= BASE_URL %>wfFont/iconfont.css" />
+
+    <link rel="stylesheet" href="<%= BASE_URL %>grapecity/jsViewer.min.css" />
+    <link rel="stylesheet" href="<%= BASE_URL %>codemirror/codemirror.css" />
+    <link rel="stylesheet" href="<%= BASE_URL %>codemirror/addon/hint/show-hint.css" />
+    <link rel="stylesheet" href="<%= BASE_URL %>codemirror/addon/fold/foldgutter.css" />
+    <link rel="stylesheet" href="<%= BASE_URL %>animate/4.1.1/animate.css" />
+
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .jcode-app-loading {
+        display: flex;
+        position: fixed;
+        z-index: -1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .jcode-app-loading-title {
+        width: 100%;
+        height: 40px;
+        margin-top: 30px;
+        color: rgb(0 0 0 / 85%);
+        font-family: -apple-system, BlinkMacSystemFont, 'segoe ui', Roboto, 'helvetica neue', Arial,
+          'noto sans', sans-serif, 'apple color emoji', 'segoe ui emoji', 'segoe ui symbol',
+          'noto color emoji';
+        font-size: 24px;
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        text-align: center;
+        font-feature-settings: 'tnum', 'tnum';
+      }
+
+      .jcode-app-loading-dot {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        width: 32px;
+        height: 32px;
+        transform: rotate(45deg);
+        animation: jcode-dot-rotate 1.2s infinite linear;
+        font-size: 32px;
+      }
+
+      .jcode-app-loading i {
+        display: block;
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        transform: scale(0.75);
+        transform-origin: 50% 50%;
+        animation: jcode-dot-spin-move 1s infinite linear alternate;
+        border-radius: 100%;
+        opacity: 0.3;
+        background-color: #1677ff;
+      }
+
+      .jcode-app-loading i:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+
+      .jcode-app-loading i:nth-child(2) {
+        top: 0;
+        right: 0;
+        animation-delay: 0.4s;
+      }
+
+      .jcode-app-loading i:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        animation-delay: 0.8s;
+      }
+
+      .jcode-app-loading i:nth-child(4) {
+        bottom: 0;
+        left: 0;
+        animation-delay: 1.2s;
+      }
+
+      @keyframes jcode-dot-rotate {
+        to {
+          transform: rotate(405deg);
+        }
+      }
+
+      @keyframes jcode-dot-rotate {
+        to {
+          transform: rotate(405deg);
+        }
+      }
+
+      @keyframes jcode-dot-spin-move {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes jcode-dot-spin-move {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+    <!-- 整页跳转（切换应用等）时，支持的浏览器做跨文档淡入淡出，弱化白屏硬切 -->
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 0.28s;
+        animation-timing-function: ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="jcode-app-loading">
+        <span class="jcode-app-loading-dot"><i></i><i></i><i></i><i></i></span>
+        <div class="jcode-app-loading-title"><%= title %></div>
+      </div>
+    </div>
+    <script src="<%= BASE_URL %>qrcode/awesome-qr.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>echarts/echarts.min.5.3.4.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>echarts/echarts-wordcloud.min.js" charset="utf-8"></script>
+
+    <script src="<%= BASE_URL %>codemirror/codemirror.min.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/selection/active-line.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/edit/matchbrackets.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/mode/multiplex.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/mode/overlay.js" charset="utf-8"></script>
+
+    <script src="<%= BASE_URL %>codemirror/addon/fold/foldcode.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/fold/foldgutter.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/fold/brace-fold.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/fold/xml-fold.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/fold/indent-fold.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/fold/markdown-fold.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/fold/comment-fold.js" charset="utf-8"></script>
+
+    <script src="<%= BASE_URL %>codemirror/mode/javascript/javascript.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/mode/css/css.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/mode/htmlmixed/htmlmixed.js" charset="utf-8"></script>
+    <script
+      src="<%= BASE_URL %>codemirror/mode/htmlembedded/htmlembedded.js"
+      charset="utf-8"
+    ></script>
+    <script src="<%= BASE_URL %>codemirror/mode/vue/vue.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/mode/clike/clike.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/mode/sql/sql.js" charset="utf-8"></script>
+    <script src="<%= BASE_URL %>codemirror/addon/hint/show-hint.js" charset="utf-8"></script>
+
+    <script src="<%= BASE_URL %>grapecity/jsViewer.min.js" charset="utf-8"></script>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

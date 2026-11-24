@@ -1,0 +1,9 @@
+import type { AppPageConfig } from '/#/page';
+import { defineConfig } from '/@/core/utils';
+
+export default defineConfig<AppPageConfig>({
+  title: '登录页',
+  isNotAuth: true,
+  isNotMenu: true,
+  isNotTab: true,
+});

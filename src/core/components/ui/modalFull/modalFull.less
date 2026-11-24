@@ -1,0 +1,96 @@
+.lr-modal-full {
+  .ant-modal {
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+
+    & > div {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .ant-modal-content,
+  .ant-modal-body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  .ant-modal-content {
+    background-color: var(--color-bg-layout);
+    background-image: var(--jcode-app-bg-image, none);
+  }
+
+  &-window {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 56px;
+    padding: 0 8px;
+    overflow: hidden;
+    background-color: var(--color-bg-overlay, var(--color-bg-container));
+    box-shadow: 0 3px 6px 1px var(--color-fill-quaternary);
+
+    &-left {
+      display: flex;
+      position: relative;
+      align-items: center;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    &-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &-mid {
+      flex: 1;
+      width: 0;
+    }
+
+    &-logo {
+      height: 20px;
+    }
+  }
+
+  &-body {
+    flex: 1;
+    height: 0;
+    overflow: auto;
+    overflow-x: hidden;
+
+    > .lr-c-schema-form {
+      background-color: var(--color-bg-container);
+    }
+  }
+
+  &-btns {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 48px;
+    padding-right: 8px;
+    border-top: 1px solid #f0f0f0;
+  }
+}

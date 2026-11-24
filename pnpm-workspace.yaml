@@ -1,0 +1,35 @@
+packages:
+  - 'internal/*'
+  - 'packages/*'
+  - 'apps/*'
+
+# pnpm 10+ 需在此声明 public-hoist-pattern（.npmrc 中的同名字段在部分 pnpm 版本下不再生效）
+# 将 eslint / stylelint / prettier / husky / lint-staged / commitlint / @vben 配置包 hoist 到根 node_modules，
+# 使其可执行文件出现在 node_modules/.bin 下，供 lint-staged / husky pre-commit 调用。
+publicHoistPattern:
+  - '*eslint*'
+  - '*prettier*'
+  - '*stylelint*'
+  - 'husky'
+  - 'lint-staged'
+  - '@commitlint/cli'
+  - '@vben/eslint-config'
+  - '@vben/stylelint-config'
+
+# pnpm 11/12 新格式：允许运行安装脚本的依赖白名单（pnpm 12 不再读取 onlyBuiltDependencies）
+allowBuilds:
+  core-js: true
+  esbuild: true
+  husky: true
+  less: true
+  vue-demi: true
+  vue3-sketch-ruler: true
+
+# 兼容 pnpm 10的旧格式，pnpm 11+ 会忽略此字段
+onlyBuiltDependencies:
+  - core-js
+  - esbuild
+  - husky
+  - less
+  - vue-demi
+  - vue3-sketch-ruler

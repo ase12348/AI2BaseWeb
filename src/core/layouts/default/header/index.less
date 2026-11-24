@@ -1,0 +1,54 @@
+@header-prefix-cls: ~'@{namespace}-layout-header';
+
+.@{header-prefix-cls} {
+  display: flex;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--jcode-header-height, 56px);
+  transition: background-color 0.3s;
+  border-bottom: 1px solid var(--jcode-color-border-header, transparent);
+  background-color: var(--jcode-color-bg-header, var(--color-bg-container));
+  color: var(--jcode-color-logo-text, var(--color-text));
+
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+
+  &-left,
+  &-right,
+  &-mid {
+    position: relative;
+    height: 100%;
+  }
+
+  &-right {
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+    gap: 8px;
+  }
+
+  &-mid {
+    display: flex;
+    flex: 2;
+    align-items: center;
+    width: 0;
+    padding-left: 64px;
+  }
+}
+
+// 顶部菜单随头部透明
+.@{header-prefix-cls} .lr-menu-horizontal,
+.@{header-prefix-cls} .lr-menu-item {
+  background-color: transparent;
+}
+.@{header-prefix-cls} .lr-menu-horizontal {
+  .lr-menu-item-content.active {
+    background-color: transparent !important;
+  }
+}

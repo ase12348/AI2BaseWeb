@@ -1,0 +1,145 @@
+<template>
+  <lr-c-schema-index ref="indexRef" />
+</template>
+<script lang="ts" setup>
+  import type { ColConfig } from '/#/page';
+  import { ref, h } from 'vue';
+  import { Switch } from 'ant-design-vue';
+  import { useMessage } from '@/core/hooks/useMessage';
+  import { useIndex } from '/@/core/hooks/useIndex';
+  import { useAuth } from '/@/core/hooks/useAuth';
+  import { api } from '../../api/deptRole';
+  import pageInfo from './page';
+  import { t } from '@/core/locales/setupI18n';
+
+  const { createConfirm, success } = useMessage();
+  let category = '';
+
+  // 按钮点击事件
+  const buttonClick = {
+    add: () => {
+      openForm({
+        title: t('新增角色'),
+        name: 'organization_deptRole_form',
+        afterOk: () => {
+          refreshTable();
+        },
+      });
+    },
+    edit: (row) => {
+      openForm({
+        title: t('编辑角色'),
+        name: 'organization_deptRole_form',
+        param: { isEdit: true, keyValue: row.fId },
+        afterOk: () => {
+          refreshTable();
+        },
+      });
+    },
+    delete: (row) => {
+      createConfirm({
+        title: t('提示'),
+        iconType: 'warning',
+        content: `${t('您确定删除')}【${row.fName}】${t('吗')}`,
+        onOk: async () => {
+          const res = await api.remove(row.fId);
+          if (res) {
+            success(t('删除成功'));
+            refreshTable();
+          }
+        },
+      });
+    },
+    dataItem: () => {
+      openForm({
+        title: t('分类管理'),
+        name: 'data_dataitem_index',
+        height: 600,
+        width: 1000,
+        hasBtns: false,
+        config: { code: 'deptRoleCategory' },
+        afterClose: async () => {
+          const tableRef = getRef('tree');
+          await tableRef.refreshData();
+        },
+      });
+    },
+  };
+
+  // 页面权限处理
+  const { getButtons, getColumns } = useAuth(pageInfo, { buttonClick });
+
+  const refreshTable = async () => {
+    const tableRef = getRef('mainTable');
+    await tableRef.refreshData();
+  };
+
+  const indexRef = ref();
+  const columnsConfig: Record<string, ColConfig> = {
+    fEnabledMark: {
+      formatter: ({ row }) => {
+        return h(Switch, {
+          checked: row.fEnabledMark === 1,
+          size: 'small',
+          onClick: async (value) => {
+            row.fEnabledMark = value ? 1 : 0;
+            const res = await api.update(row.fId, row);
+            if (res) {
+              success(t('更新成功'));
+            }
+          },
+        });
+      },
+    },
+  };
+  const { getRef, openForm } = useIndex(indexRef, [
+    {
+      type: 'lr-layout',
+      children: [
+        {
+          type: 'lr-panel',
+          slot: 'left',
+          config: {
+            title: '角色分类',
+            toolBtns: getButtons('tool'),
+          },
+          children: [
+            {
+              id: 'tree',
+              type: 'lr-tree',
+
+              config: {
+                dataType: 'dataItem',
+                dataCode: 'deptRoleCategory',
+
+                click: async (node) => {
+                  category = node[0];
+                  refreshTable();
+                },
+              },
+            },
+          ],
+        },
+        {
+          id: 'mainTable',
+          type: 'lr-table-panel',
+          config: {
+            mode: 'client',
+            columns: getColumns(columnsConfig),
+            buttons: getButtons('panel'),
+            tableButtons: getButtons(),
+            immediate: true,
+            loadData: async () => {
+              let res = await api.getList();
+              if (category) {
+                // @ts-ignore
+                res = res.filter((t) => t.fCategory == category);
+              }
+              return res;
+            },
+          },
+        },
+      ],
+    },
+  ]);
+</script>

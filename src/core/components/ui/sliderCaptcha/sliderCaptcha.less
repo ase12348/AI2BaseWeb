@@ -1,0 +1,81 @@
+/* 滑块验证码组件样式 */
+.lr-slider-captcha {
+  @keyframes lr-captcha-shine {
+    0% {
+      background-position: 200% 0%;
+    }
+
+    100% {
+      background-position: -200% 0%;
+    }
+  }
+
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  background-color: var(--color-bg-container);
+  text-align: center;
+
+  &.slider-border {
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: var(--color-border);
+
+    &.error {
+      border-color: var(--color-error);
+    }
+  }
+
+  &-action {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-right: 0.875rem;
+    padding-left: 0.875rem;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 10%),
+      0 2px 4px -2px rgb(0 0 0 / 10%);
+    cursor: move;
+  }
+
+  &-content {
+    display: flex;
+    position: absolute;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+  }
+
+  .success {
+    -webkit-text-fill-color: #fafafa;
+  }
+
+  .lr-spine-text {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background:
+      radial-gradient(circle at center, #fffc, #f000) -200% 50% / 200% 100% no-repeat,
+      #000;
+    background-clip: text !important;
+    color: transparent;
+  }
+
+  .dark .lr-spine-text {
+    background:
+      radial-gradient(circle at center, rgb(24 24 26 / 80%), transparent) -200% 50% / 200% 100% no-repeat,
+      #f4f4f4;
+  }
+}

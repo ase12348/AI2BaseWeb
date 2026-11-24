@@ -1,0 +1,297 @@
+.lr-menu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-container);
+  color: var(--color-text-medium, var(--color-text));
+
+  &::-webkit-scrollbar {
+    /* 滚动条整体样式 */
+    width: 4px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 20px;
+
+    /* 滚动条里的小方块 */
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: transparent;
+  }
+
+  &.collapsed {
+    width: 56px;
+  }
+
+  &-item {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    padding: 2px 4px;
+    transition: all 0.3s ease;
+    background-color: var(--color-bg-container);
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+
+    &.sub {
+      background-color: var(--color-fill-quaternary);
+    }
+
+    &-content {
+      display: flex;
+      position: relative;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 4px 0 16px;
+      border-radius: 8px;
+    }
+
+    &-content.p-active {
+      color: var(--color-primary);
+    }
+
+    &:hover &-content {
+      background: var(--color-fill-secondary);
+      color: var(--color-text-medium, var(--color-text));
+    }
+
+    &-content.active {
+      background: var(--color-primary-bg) !important;
+      color: var(--color-primary) !important;
+    }
+
+    &-label {
+      flex: 2;
+      width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &-icon {
+      margin-right: 4px;
+    }
+
+    &-arrow {
+      position: relative;
+      width: 10px;
+      transform: translateY(-50%);
+      transition:
+        transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+        opacity 0.3s;
+      color: currentcolor;
+
+      &.open {
+        transform: translateY(-2px);
+      }
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 1.5px;
+        transition:
+          background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+          transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+          top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+          color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        border-radius: 6px;
+        background-color: currentcolor;
+      }
+
+      &::before {
+        transform: rotate(-45deg) translateX(2.5px);
+      }
+
+      &::after {
+        transform: rotate(45deg) translateX(-2.5px);
+      }
+
+      &.open::before {
+        transform: rotate(45deg) translateX(2.5px);
+      }
+
+      &.open::after {
+        transform: rotate(-45deg) translateX(-2.5px);
+      }
+
+      &.sub::before {
+        transform: rotate(45deg) translateY(-2.5px);
+      }
+
+      &.sub::after {
+        transform: rotate(-45deg) translateY(2.5px);
+      }
+    }
+  }
+
+  &-item.collapsed {
+    .lr-menu-item-content {
+      justify-content: center;
+      padding: 0 !important;
+    }
+
+    .lr-menu-item-icon {
+      margin-right: 0 !important;
+    }
+
+    .lr-menu-item-label {
+      display: none;
+    }
+
+    .lr-menu-item-arrow {
+      display: none;
+    }
+  }
+}
+
+.lr-menu-horizontal {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-container);
+  color: var(--color-text-medium, var(--color-text));
+
+  .lr-menu-item {
+    width: auto;
+
+    &-label {
+      width: auto;
+    }
+
+    &-content {
+      padding: 0 16px;
+    }
+  }
+}
+
+.lr-menu-vertical {
+  position: relative;
+  width: 80px;
+  height: 100%;
+  background-color: #001529;
+  color: rgb(255 255 255 / 65%);
+
+  &::-webkit-scrollbar {
+    /* 滚动条整体样式 */
+    width: 4px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 20px;
+
+    /* 滚动条里的小方块 */
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .lr-menu-item {
+    height: 96px;
+    padding: 0 !important;
+    padding-top: 8px !important;
+    background-color: #001529;
+    font-size: 12px;
+  }
+
+  .lr-menu-item-content {
+    flex-direction: column;
+    padding: 0 !important;
+  }
+
+  .lr-menu-item-content.active {
+    background: transparent !important;
+    color: var(--color-primary) !important;
+  }
+
+  .lr-menu-item-label {
+    width: 100%;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .lr-menu-item:hover .lr-menu-item-content {
+    background: transparent;
+    color: #fff;
+  }
+
+  .lr-icon {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 4px;
+    color: #fff !important;
+
+    .iconify {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.lr-sub-menu {
+  .lr-menu-item-content {
+    color: var(--color-text-medium, var(--color-text));
+  }
+
+  .lr-menu-item-content.p-active {
+    color: var(--color-primary);
+  }
+
+  .ant-popover-inner {
+    min-width: 200px;
+    padding: 0 !important;
+    border-radius: 8px !important;
+  }
+
+  &-content {
+    &::-webkit-scrollbar {
+      /* 滚动条整体样式 */
+      width: 4px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 20px;
+
+      /* 滚动条里的小方块 */
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 0;
+      background: transparent;
+    }
+  }
+}
+
+.lr-menu-dark {
+  background-color: #001529;
+  color: rgb(255 255 255 / 65%);
+
+  .lr-menu-item {
+    background-color: #001529;
+  }
+
+  .lr-menu-item:hover .lr-menu-item-content {
+    background: transparent;
+    color: #fff;
+  }
+
+  .lr-menu-item-content.active {
+    background: var(--color-primary) !important;
+    color: #fff !important;
+  }
+}

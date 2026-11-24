@@ -1,0 +1,116 @@
+@prefix-cls: ~'@{namespace}-multiple-tabs';
+.@{prefix-cls} {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  padding: 0 8px;
+
+  &-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: var(--color-bg-overlay, rgb(255 255 255 / 40%));
+  }
+
+  .ant-tabs-content-holder,
+  .ant-tabs-ink-bar {
+    display: none !important;
+  }
+
+  .ant-tabs {
+    width: 100%;
+  }
+
+  .ant-tabs-nav {
+    height: 40px;
+    margin: 0 !important;
+    padding: 0 8px;
+  }
+
+  .ant-tabs-nav-wrap,
+  .ant-tabs-nav-list {
+    align-items: center;
+    height: 40px;
+  }
+
+  // 卡片页签：去掉边框、底色与下划线，仅靠文字色和浅底区分激活态
+  .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
+    height: 32px;
+    margin: 0 !important;
+    padding: 0 16px;
+    border: none !important;
+    border-radius: 2px;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 32px;
+
+    &:hover {
+      background-color: transparent !important;
+      color: var(--color-primary);
+    }
+
+    &.ant-tabs-tab-active {
+      background-color: var(--color-primary-bg2) !important;
+      color: var(--color-primary);
+    }
+
+    .ant-tabs-tab-btn {
+      color: inherit;
+      text-shadow: none;
+    }
+  }
+
+  .ant-tabs-top > .ant-tabs-nav::before {
+    display: none !important;
+  }
+
+  .ant-tabs .ant-tabs-tab .anticon {
+    margin-right: 0 !important;
+  }
+
+  .ant-btn.ant-btn-icon-only {
+    display: block;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+  }
+
+  // 页签过多时的左右滚动箭头
+  .ant-tabs-nav-operations,
+  .ant-tabs-nav-more {
+    background-color: transparent !important;
+  }
+
+  // 页签内容：字体与颜色继承外层页签，右键菜单触发器同理
+  &-item {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    cursor: pointer;
+
+    .ant-btn {
+      width: 20px !important;
+      min-width: 20px;
+      height: 20px;
+      margin-left: 4px;
+      padding: 0;
+      border-radius: 2px;
+      color: inherit;
+
+      &:hover {
+        background-color: var(--color-primary) !important;
+        color: #fff !important;
+      }
+    }
+  }
+}
