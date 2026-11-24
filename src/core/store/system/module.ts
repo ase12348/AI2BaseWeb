@@ -24,6 +24,9 @@ export interface moduleEntity {
   f_ModifyUserId: string; //修改用户主键
   f_ModifyUserName: string; //修改用户
   oldUrlAddress: string; //原先地址
+  f_TerminalType?: number; //终端类型 0电脑端 1移动端
+  f_Scheme?: string; //移动端功能方案（按钮/列表字段/表单字段 JSON）
+  f_AppCode?: string; //应用编码
 }
 
 const urlPrefix = `system/module`;
@@ -48,8 +51,9 @@ export const useModuleStore = defineStore('system-module', {
   }),
   getters: {},
   actions: {
-    async loadList() {
-      const list = (await api.getList()) || [];
+    /** 默认只加载电脑端菜单，移动端菜单由菜单管理页按需单独获取 */
+    async loadList(terminalType = 0) {
+      const list = (await api.getList({ terminalType })) || [];
       const modulesGroup: Record<string, moduleEntity[]> = {};
       const modulesDic: Record<string, moduleEntity> = {};
       const modulesDicByCode: Record<string, moduleEntity> = {};

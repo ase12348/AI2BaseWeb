@@ -5,6 +5,19 @@ import { defineConfig } from '/@/core/utils';
 const columns: ColumnType[] = [
   { label: '编号', prop: 'f_EnCode', width: 160, isNotAutoWrap: true },
   { label: '名称', prop: 'f_FullName', width: 140 },
+  {
+    label: '终端',
+    prop: 'f_TerminalType',
+    width: 90,
+    align: 'center',
+    config: {
+      dataType: 'options',
+      options: [
+        { value: 0, label: '电脑端' },
+        { value: 1, label: '移动端' },
+      ],
+    },
+  },
   { label: '地址', prop: 'f_UrlAddress', minWidth: 160, isNotAutoWrap: true },
   {
     label: '目标',
@@ -64,6 +77,10 @@ const mainForm: FormAuthConfigType = {
     {
       name: '名称',
       field: 'f_FullName',
+    },
+    {
+      name: '终端',
+      field: 'f_TerminalType',
     },
     {
       name: '编码',
