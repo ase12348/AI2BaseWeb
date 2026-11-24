@@ -18,11 +18,11 @@
 
 本仓库是平台的 **Web 前端（PC 端）**，基于 Vue 3 + Vite + TypeScript 构建，负责平台自身的全部管理界面与运行时渲染。它不包含后端逻辑，所有数据能力由后端基座服务提供。
 
-| 组成 | 仓库 | 技术栈 | 说明 |
-| --- | --- | --- | --- |
-| Web 前端 | 当前仓库 | Vue 3 / Vite / TS | PC 端管理界面 |
-| 后端服务 | [AI2BaseApi](https://gitee.com/program_cat/ai2-base-api) | .NET 10 / ASP.NET Core | API 宿主、ORM、权限、缓存、任务调度 |
-| 移动端 | [AI2BaseApp](https://gitee.com/program_cat/ai2-base-app) | uni-app / Vue 3 | 同一套表单渲染到小程序 / App / 鸿蒙 |
+| 组成 | Gitee | GitHub | 技术栈 | 说明 |
+| --- | --- | --- | --- | --- |
+| Web 前端 | [AI2BaseWeb](https://gitee.com/program_cat/ai2-base-web) | [AI2BaseWeb](https://github.com/ase12348/AI2BaseWeb) | Vue 3 / Vite / TS | PC 端管理界面 |
+| 后端服务 | [AI2BaseApi](https://gitee.com/program_cat/ai2-base-api) | [AI2BaseApi](https://github.com/ase12348/AI2BaseApi) | .NET 10 / ASP.NET Core | API 宿主、ORM、权限、缓存、任务调度 |
+| 移动端 | [AI2BaseApp](https://gitee.com/program_cat/ai2-base-app) | [AI2BaseApp](https://github.com/ase12348/AI2BaseApp) | uni-app / Vue 3 | 同一套表单渲染到小程序 / App / 鸿蒙 |
 
 > 官网与产品介绍：**<https://www.jcodesoft.com>**
 
