@@ -16,9 +16,11 @@
               <span class="scheme-panel__tip">
                 {{ $t('配置该移动端功能的操作按钮，编码供 App 端按权限显示') }}
               </span>
-              <a-button type="primary" size="small" @click="addRow('btns')">
-                {{ $t('新增按钮') }}
-              </a-button>
+              <lr-button type="primary" :label="$t('新增按钮')" @click="addRow('btns')">
+                <template #icon>
+                  <lr-icon icon="ant-design:plus-outlined" :is-div="false" class="lr-button-icon" />
+                </template>
+              </lr-button>
             </div>
             <a-table
               :columns="btnColumns"
@@ -27,7 +29,7 @@
               :locale="{ emptyText: $t('暂无按钮，点击右上角新增') }"
               size="small"
               row-key="__key"
-              :scroll="{ y: 360 }"
+              :scroll="{ y: 400 }"
             >
               <template #bodyCell="{ column, record, index }">
                 <template v-if="column.dataIndex === 'label'">
@@ -35,16 +37,6 @@
                 </template>
                 <template v-else-if="column.dataIndex === 'prop'">
                   <a-input v-model:value="record.prop" :placeholder="$t('如：Add')" />
-                </template>
-                <template v-else-if="column.dataIndex === 'place'">
-                  <a-select
-                    v-model:value="record.place"
-                    :options="placeOptions"
-                    style="width: 100%"
-                  />
-                </template>
-                <template v-else-if="column.dataIndex === 'icon'">
-                  <a-input v-model:value="record.icon" :placeholder="$t('图标名，可不填')" />
                 </template>
                 <template v-else-if="column.dataIndex === 'actionKey'">
                   <span class="scheme-panel__action" @click="moveRow('btns', index, -1)">
@@ -66,11 +58,13 @@
           <div class="scheme-panel">
             <div class="scheme-panel__bar">
               <span class="scheme-panel__tip">
-                {{ $t('配置该移动端功能列表显示的字段，勾选查询可作为顶部搜索条件') }}
+                {{ $t('配置该移动端功能列表显示的字段') }}
               </span>
-              <a-button type="primary" size="small" @click="addRow('columns')">
-                {{ $t('新增字段') }}
-              </a-button>
+              <lr-button type="primary" :label="$t('新增字段')" @click="addRow('columns')">
+                <template #icon>
+                  <lr-icon icon="ant-design:plus-outlined" :is-div="false" class="lr-button-icon" />
+                </template>
+              </lr-button>
             </div>
             <a-table
               :columns="columnColumns"
@@ -79,7 +73,7 @@
               :locale="{ emptyText: $t('暂无字段，点击右上角新增') }"
               size="small"
               row-key="__key"
-              :scroll="{ y: 360 }"
+              :scroll="{ y: 400 }"
             >
               <template #bodyCell="{ column, record, index }">
                 <template v-if="column.dataIndex === 'prop'">
@@ -87,25 +81,6 @@
                 </template>
                 <template v-else-if="column.dataIndex === 'label'">
                   <a-input v-model:value="record.label" :placeholder="$t('如：名称')" />
-                </template>
-                <template v-else-if="column.dataIndex === 'width'">
-                  <a-input-number
-                    v-model:value="record.width"
-                    :min="40"
-                    :max="600"
-                    :step="10"
-                    style="width: 100%"
-                  />
-                </template>
-                <template v-else-if="column.dataIndex === 'align'">
-                  <a-select
-                    v-model:value="record.align"
-                    :options="alignOptions"
-                    style="width: 100%"
-                  />
-                </template>
-                <template v-else-if="column.dataIndex === 'isQuery'">
-                  <a-switch v-model:checked="record.isQuery" size="small" />
                 </template>
                 <template v-else-if="column.dataIndex === 'actionKey'">
                   <span class="scheme-panel__action" @click="moveRow('columns', index, -1)">
@@ -127,11 +102,13 @@
           <div class="scheme-panel">
             <div class="scheme-panel__bar">
               <span class="scheme-panel__tip">
-                {{ $t('配置该移动端功能新增/编辑表单的字段与控件类型') }}
+                {{ $t('配置该移动端功能新增/编辑表单的字段') }}
               </span>
-              <a-button type="primary" size="small" @click="addRow('formFields')">
-                {{ $t('新增字段') }}
-              </a-button>
+              <lr-button type="primary" :label="$t('新增字段')" @click="addRow('formFields')">
+                <template #icon>
+                  <lr-icon icon="ant-design:plus-outlined" :is-div="false" class="lr-button-icon" />
+                </template>
+              </lr-button>
             </div>
             <a-table
               :columns="formFieldColumns"
@@ -140,7 +117,7 @@
               :locale="{ emptyText: $t('暂无字段，点击右上角新增') }"
               size="small"
               row-key="__key"
-              :scroll="{ y: 360 }"
+              :scroll="{ y: 400 }"
             >
               <template #bodyCell="{ column, record, index }">
                 <template v-if="column.dataIndex === 'prop'">
@@ -148,16 +125,6 @@
                 </template>
                 <template v-else-if="column.dataIndex === 'label'">
                   <a-input v-model:value="record.label" :placeholder="$t('如：名称')" />
-                </template>
-                <template v-else-if="column.dataIndex === 'type'">
-                  <a-select
-                    v-model:value="record.type"
-                    :options="formTypeOptions"
-                    style="width: 100%"
-                  />
-                </template>
-                <template v-else-if="column.dataIndex === 'required'">
-                  <a-switch v-model:checked="record.required" size="small" />
                 </template>
                 <template v-else-if="column.dataIndex === 'actionKey'">
                   <span class="scheme-panel__action" @click="moveRow('formFields', index, -1)">
@@ -231,53 +198,26 @@
   let rowSeq = 0;
   const nextKey = () => `r${++rowSeq}`;
 
-  const placeOptions = [
-    { value: 'panel', label: t('顶部按钮') },
-    { value: 'row', label: t('行内按钮') },
-  ];
-  const alignOptions = [
-    { value: 'left', label: t('左对齐') },
-    { value: 'center', label: t('居中') },
-    { value: 'right', label: t('右对齐') },
-  ];
-  const formTypeOptions = [
-    { value: 'input', label: t('单行文本') },
-    { value: 'textarea', label: t('多行文本') },
-    { value: 'number', label: t('数字') },
-    { value: 'select', label: t('下拉选择') },
-    { value: 'date', label: t('日期') },
-    { value: 'switch', label: t('开关') },
-    { value: 'upload', label: t('附件') },
-    { value: 'user', label: t('人员') },
-  ];
-
   const btnColumns = [
     { title: t('按钮名称'), dataIndex: 'label', width: 150 },
     { title: t('按钮编码'), dataIndex: 'prop', width: 160 },
-    { title: t('位置'), dataIndex: 'place', width: 110 },
-    { title: t('图标'), dataIndex: 'icon' },
     { title: t('操作'), dataIndex: 'actionKey', width: 130, align: 'center' },
   ];
   const columnColumns = [
     { title: t('字段名'), dataIndex: 'prop', width: 150 },
     { title: t('标题'), dataIndex: 'label', width: 140 },
-    { title: t('宽度'), dataIndex: 'width', width: 90 },
-    { title: t('对齐'), dataIndex: 'align', width: 110 },
-    { title: t('查询'), dataIndex: 'isQuery', width: 70, align: 'center' },
     { title: t('操作'), dataIndex: 'actionKey', width: 130, align: 'center' },
   ];
   const formFieldColumns = [
     { title: t('字段名'), dataIndex: 'prop', width: 150 },
     { title: t('标题'), dataIndex: 'label', width: 140 },
-    { title: t('控件类型'), dataIndex: 'type', width: 120 },
-    { title: t('必填'), dataIndex: 'required', width: 70, align: 'center' },
     { title: t('操作'), dataIndex: 'actionKey', width: 130, align: 'center' },
   ];
 
   const rowDefault = {
-    btns: () => ({ label: '', prop: '', place: 'panel', icon: '' }),
-    columns: () => ({ prop: '', label: '', width: 120, align: 'left', isQuery: false }),
-    formFields: () => ({ prop: '', label: '', type: 'input', required: false }),
+    btns: () => ({ label: '', prop: '' }),
+    columns: () => ({ prop: '', label: '' }),
+    formFields: () => ({ prop: '', label: '' }),
   };
 
   const addRow = (kind: SchemeKind) => {
@@ -298,6 +238,13 @@
     list.splice(target, 0, row);
   };
 
+  /** 各组方案保留的字段 */
+  const schemeFields: Record<SchemeKind, string[]> = {
+    btns: ['label', 'prop'],
+    columns: ['prop', 'label'],
+    formFields: ['prop', 'label'],
+  };
+
   /** 解析方案 JSON */
   const loadScheme = (value?: string) => {
     scheme.btns = [];
@@ -310,7 +257,11 @@
       const data = JSON.parse(value) || {};
       (['btns', 'columns', 'formFields'] as SchemeKind[]).forEach((kind) => {
         const list = Array.isArray(data[kind]) ? data[kind] : [];
-        scheme[kind] = list.map((item) => ({ __key: nextKey(), ...item }));
+        const keys = schemeFields[kind];
+        scheme[kind] = list.map((item) => ({
+          __key: nextKey(),
+          ...Object.fromEntries(keys.map((key) => [key, item[key]])),
+        }));
       });
     } catch (e) {
       console.warn('移动端功能方案解析失败', e);
@@ -365,6 +316,20 @@
       },
     },
 
+    // 移动端用「分类」组织功能（数据字典 function），不再配置导航目标
+    f_Type: {
+      type: 'select',
+      config: {
+        span: 12,
+        dataType: 'dataItem',
+        dataCode: 'function',
+        placeholder: t('请选择功能分类'),
+        getUpConfig: () => {
+          return { display: isMobile.value };
+        },
+      },
+    },
+
     f_Target: {
       type: 'select',
       config: {
@@ -384,7 +349,11 @@
           },
         ],
         getUpConfig: ({ formData }) => {
-          return { display: !['custmerView', 'desktopView', 'biView'].includes(formData.f_Target) };
+          return {
+            display:
+              !isMobile.value &&
+              !['custmerView', 'desktopView', 'biView'].includes(formData.f_Target),
+          };
         },
       },
       rule: [...ruleSelectDefault],
@@ -473,7 +442,13 @@
       terminalType.value = param.terminalType ?? 0;
       originalScheme.value = '';
       loadScheme('');
-      setFormData({ main: { f_TerminalType: terminalType.value } });
+      // 移动端从左侧分类进入新增时，默认选中该分类
+      setFormData({
+        main: {
+          f_TerminalType: terminalType.value,
+          ...(param.category ? { f_Type: param.category } : {}),
+        },
+      });
     }
   };
 
@@ -512,29 +487,84 @@
     min-height: 0;
 
     &__tabs {
+      display: flex;
       flex: 1;
+      flex-direction: column;
       min-height: 0;
 
       :deep(.ant-tabs-nav) {
+        flex: none;
         margin-bottom: 0;
         padding: 0 8px;
       }
 
       :deep(.ant-tabs-content-holder) {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      :deep(.ant-tabs-content) {
+        height: 100%;
+      }
+
+      :deep(.ant-tabs-tabpane) {
+        height: 100%;
         overflow: auto;
       }
     }
   }
 
   .scheme-panel {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    height: 100%;
     padding: 8px;
+
+    // 表格撑满面板剩余高度：表头固定，表体按剩余高度滚动
+    :deep(.ant-table-wrapper),
+    :deep(.ant-spin-nested-loading),
+    :deep(.ant-spin-container),
+    :deep(.ant-table),
+    :deep(.ant-table-container) {
+      height: 100%;
+      min-height: 0;
+    }
+
+    :deep(.ant-table-wrapper) {
+      flex: 1;
+      min-height: 0;
+    }
+
+    :deep(.ant-table-container) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    :deep(.ant-table-header) {
+      flex: none;
+    }
+
+    :deep(.ant-table-body) {
+      flex: 1;
+      min-height: 0;
+      max-height: none !important;
+      overflow-y: auto !important;
+    }
   }
 
   .scheme-panel__bar {
     display: flex;
+    flex: none;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
+
+    // 与列表页的新增按钮保持一致，不被提示文字挤压
+    :deep(.lr-button) {
+      flex: none;
+    }
   }
 
   .scheme-panel__tip {

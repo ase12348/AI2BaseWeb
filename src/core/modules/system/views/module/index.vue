@@ -25,6 +25,7 @@
   import { useIndex } from '/@/core/hooks/useIndex';
   import { useAuth } from '/@/core/hooks/useAuth';
   import { useMenu } from '/@/core/hooks/useMenu';
+  import { useDataItem } from '/@/core/hooks/data/useDataItem';
   import { api as moduleApi } from '/@/core/modules/system/api/module';
   import pageInfo from './page';
   import { t } from '@/core/locales/setupI18n';
@@ -61,6 +62,19 @@
   };
 
   const nameFilter = ref('');
+
+  /** 移动端分类：取数据字典「移动功能」(function) 的明细，与 App 端分组一致 */
+  const { loadDataItemList, getDataItem } = useDataItem();
+  const categoryList = computed(() =>
+    (getDataItem.value['function'] || []).map((item) => ({
+      f_ModuleId: item.f_ItemValue,
+      f_ParentId: '0',
+      f_FullName: item.f_ItemName,
+    })),
+  );
+  const loadCategory = async () => {
+    await loadDataItemList('function');
+  };
 
   /** 名称命中的菜单主键；空关键字返回 null 表示不过滤 */
   const getKeywordIds = (list: any[], keyword: string) => {
@@ -99,12 +113,20 @@
     return visible;
   };
 
-  /** 当前终端的目录树（名称过滤只作用于当前终端） */
+  /** 左侧树数据源：电脑端是功能目录，移动端是数据字典 function 里的分类 */
   const treeList = computed(() => {
+    if (currentTerminal.value === 1) {
+      return categoryList.value;
+    }
     const list = currentList.value;
     const visible = getVisibleTreeIds(list, nameFilter.value);
     return list.filter((item) => item.f_Target === 'expand' && visible.has(item.f_ModuleId));
   });
+
+  /** 左侧面板标题随终端变化 */
+  const leftPanelTitle = computed(() =>
+    currentTerminal.value === 1 ? t('功能分类') : t('功能目录'),
+  );
 
   const groupByParent = (list: any[]) => {
     const group: Record<string, any[]> = {};
@@ -139,6 +161,8 @@
         expandIds: [...currentScopeIds.value],
         expandList,
         terminalType: terminal,
+        // 移动端：新增时默认带上左侧选中的分类
+        category: terminal === 1 && moduleId !== '0' ? moduleId : '',
         ...param,
       },
       afterOk: async () => {
@@ -196,6 +220,9 @@
     moduleId = '0';
     nameFilter.value = '';
     await loadTerminal(terminal);
+    if (terminal === 1) {
+      await loadCategory();
+    }
     await nextTick();
     getRef('menuTree')?.setValue([]);
     await refreshTable();
@@ -229,7 +256,7 @@
           type: 'lr-panel',
           slot: 'left',
           config: {
-            title: '功能目录',
+            title: leftPanelTitle,
           },
           children: [
             {
@@ -278,6 +305,18 @@
               nameFilter.value = keyword;
 
               const list = currentList.value;
+
+              // 移动端左侧是分类：按分类值（f_Type）过滤，没有层级树
+              if (currentTerminal.value === 1) {
+                const matchedIds = getKeywordIds(list, keyword);
+                return list.filter(
+                  (item) =>
+                    currentScopeIds.value.has(item.f_ModuleId) &&
+                    (moduleId === '0' || item.f_Type === moduleId) &&
+                    (!matchedIds || matchedIds.has(item.f_ModuleId)),
+                );
+              }
+
               const visibleTreeIds = getVisibleTreeIds(list, keyword);
               if (moduleId !== '0' && !visibleTreeIds.has(moduleId)) {
                 moduleId = '0';
@@ -329,7 +368,7 @@
   ]);
 
   onMounted(async () => {
-    await Promise.all([loadTerminal(0), loadTerminal(1)]);
+    await Promise.all([loadTerminal(0), loadTerminal(1), loadCategory()]);
   });
 </script>
 

@@ -1,4 +1,4 @@
-import { defHttp, useCURD } from '/@/core/utils/http/axios';
+import { defHttp } from '/@/core/utils/http/axios';
 import module from '../module';
 
 export interface functionEntity {
@@ -27,19 +27,17 @@ export interface functionEntity {
 }
 
 const urlPrefix = `${module.code}/module`;
-const crud = useCURD<functionEntity>(urlPrefix);
+/**
+ * 移动端功能（数据统一存放在菜单表 lr_base_module，F_Scheme 保存按钮/列表字段/表单字段）
+ * 已取消 lr_app_function / lr_app_fnscheme / lr_app_moduleitem / lr_app_myfunction，
+ * 因此不再提供新增、修改、删除、启停用的接口。
+ */
 export const api = {
-  ...crud,
   /**
    * @description: 获取数据
    */
   getList: () => {
     return defHttp.get<functionEntity[]>({ url: `${urlPrefix}s` }, { errorMessageMode: 'none' });
-  },
-  updateState: (id: string, state: number) => {
-    return defHttp.put({
-      url: `${urlPrefix}/${id}/${state}`,
-    });
   },
   getChildren: (id: string, type: number) => {
     return defHttp.get({

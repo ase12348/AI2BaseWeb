@@ -24,6 +24,7 @@ export interface moduleEntity {
   f_ModifyUserName: string; //修改用户
   oldUrlAddress: string; //原先地址
   f_TerminalType?: number; //终端类型 0电脑端 1移动端
+  f_Type?: string; //功能分类（移动端对应数据字典 function 明细值）
   f_Scheme?: string; //移动端功能方案（按钮/列表字段/表单字段 JSON）
   f_AppCode?: string; //应用编码
 }

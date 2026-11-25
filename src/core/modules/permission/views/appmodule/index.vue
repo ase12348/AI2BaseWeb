@@ -125,11 +125,15 @@
     return getAppTree(myApps.value);
   });
 
+  // 按钮/列表/表单页签的左侧功能树：只展示「功能」页签当前已勾选的功能。
+  // 没勾选/授权的功能不参与子项权限配置，避免右侧出现不该有的字段勾选。
   const appCheckedDataList = computed(() => {
     if (!selectRow.value) {
       return [];
     }
-    return getAppTree(myApps.value.filter((t) => moduleCheckedList.value.includes(t.f_Id)));
+    return getAppTree(
+      myApps.value.filter((t) => moduleCheckedListBySetting.value.includes(t.f_Id)),
+    );
   });
 
   const loadAppList = async () => {

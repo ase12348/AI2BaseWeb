@@ -99,6 +99,10 @@ const mainForm: FormAuthConfigType = {
       field: 'f_Target',
     },
     {
+      name: '分类',
+      field: 'f_Type',
+    },
+    {
       name: '排序',
       field: 'f_SortCode',
     },
